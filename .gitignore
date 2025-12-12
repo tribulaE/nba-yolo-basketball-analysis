@@ -1,0 +1,8 @@
+*.pt
+*.mp4
+*.avi
+*.pkl
+nba_analysis/models/
+nba_analysis/input_videos/
+nba_analysis/output_videos/
+nba_analysis/stubs/

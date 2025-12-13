@@ -14,7 +14,6 @@ class PlayerTracksDrawer:
 
             # Draw Players tracks
             for track_id, player in player_dict.items():
-                print(player.keys())
                 frame = draw_ellipse(frame, player['box'], (0,0,255), track_id)
                 
             output_video_frames.append(frame)

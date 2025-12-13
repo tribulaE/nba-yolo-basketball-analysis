@@ -15,8 +15,9 @@ def draw_triangle(frame, bbox, color):
         [x+10, y-20]
     ])
 
+    # Filled and surrounding of triangle
     cv2.drawContours(frame, [triangle_points], 0, color, cv2.FILLED)
-    cv2.drawContours(frame, [triangle_points], 0, color, 2)
+    cv2.drawContours(frame, [triangle_points], 0, (0, 0, 0), 2)
 
     return frame
 

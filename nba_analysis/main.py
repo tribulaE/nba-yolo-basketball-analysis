@@ -23,6 +23,12 @@ def main():
                                                  read_from_stub=True,
                                                  stub_path="stubs/ball_track_stubs.pk1"
                                                 )
+    
+    # Remove wrong ball detections
+    ball_tracks = ball_tracker.remove_wrong_detections(ball_tracks)
+
+    #  Interpolat Ball Tracks
+    ball_tracks=ball_tracker.interpolate_ball_positions(ball_tracks)
 
 
     # Draw Output

@@ -3,9 +3,7 @@
 This project builds an AI/ML basketball analysis pipeline using YOLO, OpenCV, and Python.
 
 ## Overview
-The system uses YOLO (a state-of-the-art object detector) to detect players and the ball, then applies tracking to follow these objects across video frames.
-
-Over time, this project will expand into a full analytics pipeline, including model training and court-aware metrics.
+It takes broadcast footage and uses AI to track players, identify teams by jersey color, track the ball, and map player movements onto a 2D tactical board to calculate speed and distance run
 
 ## Planned Features
 - Player and ball detection using YOLO  

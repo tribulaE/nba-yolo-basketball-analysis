@@ -1,6 +1,6 @@
 # AI/ML NBA Basketball Analysis System (WIP)
 
-This project builds an AI/ML basketball analysis pipeline using YOLO, OpenCV, and Python.
+This project builds an AI/ML basketball analysis pipeline using YOLO, OpenCV, PyTorch and Python.
 
 ## Overview
 It takes broadcast footage and uses AI to track players, identify teams by jersey color, track the ball, and map player movements onto a 2D tactical board to calculate speed and distance run

@@ -1,7 +1,9 @@
 from PIL import Image
 from transformers import CLIPProcessor, CLIPModel
 import cv2
-
+import sys
+sys.path.append("../")
+from utils import read_stub, save_stub
 
 
 class TeamAssigner:
@@ -48,6 +50,7 @@ class TeamAssigner:
 
         player_color = self.get_player_color(frame, player_bbox)
 
+        # Jersey color white is 2 , Jersery color blue is 1
         team_id = 2
         if player_color ==self.team_1_class_name:
             team_id = 1
@@ -56,6 +59,12 @@ class TeamAssigner:
         return team_id
     
     def get_player_teams_across_frames(self, video_frames, player_tracks, read_from_stub=False, stub_path=None):
+
+        player_assignment = read_stub(read_from_stub, stub_path)
+        if player_assignment is not None:
+            if len(player_assignment) == len(video_frames):
+                return player_assignment
+
 
         self.load_model()
 
@@ -66,9 +75,14 @@ class TeamAssigner:
         for frame_num, player_track in enumerate(player_tracks):
             player_assignment.append({})
 
+            if frame_num %50 == 0:
+                self.player_team_dict={}
+
 
             for player_id, track in player_track.items():
-                team = self.get_player_team(video_frames[frame_num], track["bbox"], player_id)
+                team = self.get_player_team(video_frames[frame_num], track["box"], player_id)
                 player_assignment[frame_num][player_id]=team
+
+        save_stub(stub_path, player_assignment)
 
         return player_assignment

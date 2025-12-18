@@ -1,8 +1,9 @@
 from utils import read_video, save_video
 from trackers import PlayerTracker, BallTracker
-from drawers import ( PlayerTracksDrawer, BallTracksDrawer, TeamBallControlDrawer)
+from drawers import ( PlayerTracksDrawer, BallTracksDrawer, TeamBallControlDrawer, PassInterceptionDrawer)
 from team_assigner import TeamAssigner
 from ball_acquisition import BallAquisitionDetector
+from interceptions_passes import PassAndInterceptionDetector
 
 
 
@@ -10,7 +11,7 @@ def main():
    
     # Read Video
 
-    video_frames = read_video("input_videos/video_1.mp4")
+    video_frames = read_video("input_videos/video_3.mp4")
 
     # Initialize Tracker
     player_tracker = PlayerTracker("models/player_detector.pt")
@@ -31,7 +32,7 @@ def main():
     ball_tracks = ball_tracker.remove_wrong_detections(ball_tracks)
 
     #  Interpolate Ball Tracks
-    ball_tracks=ball_tracker.interpolate_ball_positions(ball_tracks)\
+    ball_tracks=ball_tracker.interpolate_ball_positions(ball_tracks)
     
     # Assign Player Teams
     team_assigner = TeamAssigner()
@@ -44,14 +45,18 @@ def main():
     ball_aquisition_detector = BallAquisitionDetector()
     ball_aquisition = ball_aquisition_detector.detect_ball_possession(player_tracks, ball_tracks)
 
-    print(ball_aquisition)
-
+    # Detect Passes and Interceptions
+    pass_and_interception_detector = PassAndInterceptionDetector()
+    passes = pass_and_interception_detector.detect_passes(ball_aquisition, player_assignment)
+    interceptions = pass_and_interception_detector.detect_interceptions(ball_aquisition, player_assignment)
+    
 
     # Draw Output
     # Initialize Drawers
     player_tracks_drawer = PlayerTracksDrawer()
     ball_tracks_drawer = BallTracksDrawer()
     team_ball_control_drawer = TeamBallControlDrawer()
+    pass_and_interception_drawer = PassInterceptionDrawer()
     # Draw Object Tracks
     output_video_frames = player_tracks_drawer.draw(video_frames, player_tracks, player_assignment, ball_aquisition)
     output_video_frames = ball_tracks_drawer.draw(output_video_frames, ball_tracks)
@@ -59,6 +64,9 @@ def main():
 
     # Draw Team Ball Control
     output_video_frames = team_ball_control_drawer.draw(output_video_frames, player_assignment, ball_aquisition)
+
+    # Draw Passes and Interception
+    output_video_frames = pass_and_interception_drawer.draw(output_video_frames, passes, interceptions)
 
     # Save Video    
     save_video(output_video_frames, "output_videos/output_video.avi")

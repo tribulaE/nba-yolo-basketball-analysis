@@ -3,7 +3,7 @@ from transformers import CLIPProcessor, CLIPModel
 import cv2
 import sys
 sys.path.append("../")
-from utils import read_stub, save_stub
+from ..utils import read_stub, save_stub
 
 
 class TeamAssigner:

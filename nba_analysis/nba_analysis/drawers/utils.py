@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import sys
 sys.path.append("../")
-from utils import get_center_of_bbox, get_bbox_width
+from ..utils import get_center_of_bbox, get_bbox_width
 
 
 def draw_triangle(frame, bbox, color):

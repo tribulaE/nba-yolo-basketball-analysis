@@ -1,9 +1,9 @@
-from utils import read_video, save_video
-from trackers import PlayerTracker, BallTracker
-from drawers import ( PlayerTracksDrawer, BallTracksDrawer, TeamBallControlDrawer, PassInterceptionDrawer)
-from team_assigner import TeamAssigner
-from ball_acquisition import BallAquisitionDetector
-from interceptions_passes import PassAndInterceptionDetector
+from .utils import read_video, save_video
+from .trackers import PlayerTracker, BallTracker
+from .drawers import ( PlayerTracksDrawer, BallTracksDrawer, TeamBallControlDrawer, PassInterceptionDrawer)
+from .team_assigner import TeamAssigner
+from .ball_acquisition import BallAquisitionDetector
+from .interceptions_passes import PassAndInterceptionDetector
 
 
 
@@ -14,8 +14,8 @@ def main():
     video_frames = read_video("input_videos/video_3.mp4")
 
     # Initialize Tracker
-    player_tracker = PlayerTracker("models/player_detector.pt")
-    ball_tracker = BallTracker("models/ball_detector_model.pt")
+    player_tracker = PlayerTracker('nba_analysis/models/player_detector.pt')
+    ball_tracker = BallTracker('nba_analysis/models/ball_detector_model.pt')
 
     # Run Trackers
     player_tracks = player_tracker.get_object_tracks(video_frames,

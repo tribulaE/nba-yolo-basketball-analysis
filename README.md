@@ -12,9 +12,6 @@ It takes broadcast footage and uses AI to track players, identify teams by jerse
 - Custom object detector training  
 - Team assignment using zero-shot image classification (Hugging Face)  
 
-## Status
- Complete
-
 ## Credits
 - Tutorial inspiration: https://youtu.be/QqVahw9tBfw
 

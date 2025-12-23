@@ -15,8 +15,7 @@ class CourtKeypointDrawer:
             text_thickness=1
             )
         output_frames = []
-        print("frames:", len(frames))
-        print("court_keypoints:", len(court_keypoints))
+        
 
         for index, frame in enumerate(frames):
             annotate_frame = frame.copy()

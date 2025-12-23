@@ -92,7 +92,8 @@ def main():
     output_video_frames = tactical_view_drawer.draw(output_video_frames, 
                                                        tactical_view_converter.court_image_path, 
                                                        tactical_view_converter.width, 
-                                                       tactical_view_converter.height)
+                                                       tactical_view_converter.height,
+                                                       tactical_view_converter.key_points)
 
     # Save Video    
     save_video(output_video_frames, "output_videos/output_video.avi")
